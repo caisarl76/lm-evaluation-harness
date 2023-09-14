@@ -36,33 +36,33 @@ def parse_args():
 
 def main():
     args = parse_args()
-
+    
     if args.tasks == 'arc':
         args.tasks = 'arc_challenge'
         args.num_fewshot = 25
         args.batch_size=16
-        args.output_path = os.path.join(args.model_args, 'arc_result.json')
+        args.output_path = os.path.join(args.model_args[11:], 'arc_result.json')
     elif args.tasks == 'hella':
         args.tasks = 'hellaswag'
         args.num_fewshot = 10
         args.batch_size=16
         args.limit=0.3
-        args.output_path = os.path.join(args.model_args, 'hellaswag_result.json')
+        args.output_path = os.path.join(args.model_args[11:], 'hellaswag_result.json')
     elif args.tasks == 'truth':
         args.tasks = 'truthfulqa_mc'
         args.num_fewshot = 0
         args.batch_size=32
-        args.output_path = os.path.join(args.model_args, 'truthfulQA_result.json')
+        args.output_path = os.path.join(args.model_args[11:], 'truthfulQA_result.json')
     elif args.tasks == 'mmlu':
         args.tasks = 'hendrycksTest-abstract_algebra,hendrycksTest-anatomy,hendrycksTest-astronomy,hendrycksTest-business_ethics,hendrycksTest-clinical_knowledge,hendrycksTest-college_biology,hendrycksTest-college_chemistry,hendrycksTest-college_computer_science,hendrycksTest-college_mathematics,hendrycksTest-college_medicine,hendrycksTest-college_physics,hendrycksTest-computer_security,hendrycksTest-conceptual_physics,hendrycksTest-econometrics,hendrycksTest-electrical_engineering,hendrycksTest-elementary_mathematics,hendrycksTest-formal_logic,hendrycksTest-global_facts,hendrycksTest-high_school_biology,hendrycksTest-high_school_chemistry,hendrycksTest-high_school_computer_science,hendrycksTest-high_school_european_history,hendrycksTest-high_school_geography,hendrycksTest-high_school_government_and_politics,hendrycksTest-high_school_macroeconomics,hendrycksTest-high_school_mathematics,hendrycksTest-high_school_microeconomics,hendrycksTest-high_school_physics,hendrycksTest-high_school_psychology,hendrycksTest-high_school_statistics,hendrycksTest-high_school_us_history,hendrycksTest-high_school_world_history,hendrycksTest-human_aging,hendrycksTest-human_sexuality,hendrycksTest-international_law,hendrycksTest-jurisprudence,hendrycksTest-logical_fallacies,hendrycksTest-machine_learning,hendrycksTest-management,hendrycksTest-marketing,hendrycksTest-medical_genetics,hendrycksTest-miscellaneous,hendrycksTest-moral_disputes,hendrycksTest-moral_scenarios,hendrycksTest-nutrition,hendrycksTest-philosophy,hendrycksTest-prehistory,hendrycksTest-professional_accounting,hendrycksTest-professional_law,hendrycksTest-professional_medicine,hendrycksTest-professional_psychology,hendrycksTest-public_relations,hendrycksTest-security_studies,hendrycksTest-sociology,hendrycksTest-us_foreign_policy,hendrycksTest-virology,hendrycksTest-world_religions'
         args.num_fewshot = 5
         args.batch_size=8
         args.limit=0.1
-        args.output_path = os.path.join(args.model_args, 'mmlu_result.json')
+        args.output_path = os.path.join(args.model_args[11:], 'mmlu_result.json')
     if args.device is None:
         args.device = 'cuda:0'
     assert not args.provide_description  # not implemented
-
+    print('result save on: ', args.output_path)
     if args.limit:
         print(
             "WARNING: --limit SHOULD ONLY BE USED FOR TESTING. REAL METRICS SHOULD NOT BE COMPUTED USING LIMIT."
