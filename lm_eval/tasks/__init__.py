@@ -99,6 +99,12 @@ all_translation_benchmarks = {
 
 
 TASK_REGISTRY = {
+    #OpenLLM Challenge
+    "arc":None,
+    "mmlu":None,
+    "truth":None,
+    "hella":None,
+
     "babi": babi.Babi,
     # GLUE
     "cola": glue.CoLA,
