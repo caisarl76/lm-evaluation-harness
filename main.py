@@ -30,6 +30,7 @@ def parse_args():
     parser.add_argument("--check_integrity", action="store_true")
     parser.add_argument("--write_out", action="store_true", default=False)
     parser.add_argument("--output_base_path", type=str, default=None)
+    parser.add_argument("--multi_gpu", action='store_true')
 
     return parser.parse_args()
 
@@ -37,6 +38,7 @@ def parse_args():
 def main():
     args = parse_args()
     
+    args.model = 'hf-causal-experimental'
     if args.tasks == 'arc':
         args.tasks = 'arc_challenge'
         args.num_fewshot = 25
@@ -45,7 +47,7 @@ def main():
     elif args.tasks == 'hella':
         args.tasks = 'hellaswag'
         args.num_fewshot = 10
-        args.batch_size=16
+        args.batch_size=32
         args.limit=0.3
         args.output_path = os.path.join(args.model_args[11:], 'hellaswag_result.json')
     elif args.tasks == 'truth':
@@ -60,7 +62,7 @@ def main():
         args.limit=0.1
         args.output_path = os.path.join(args.model_args[11:], 'mmlu_result.json')
     if args.device is None:
-        args.device = 'cuda:0'
+        args.device = 'cuda'
     assert not args.provide_description  # not implemented
     print('result save on: ', args.output_path)
     if args.limit:
